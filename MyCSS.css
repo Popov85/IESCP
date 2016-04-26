@@ -1,0 +1,1805 @@
+﻿﻿/*
+	10-07-2008: tabGroup - сделано
+	10-07-2008: calendar - сделано, но непонятно, почему высота ячеек не увеличивается
+	 
+*/
+
+/* @class="%ZEN.Component.object" */
+/* @class="%ZEN.Component.component" */
+/* @doc="Default style for labels." */
+
+body, td, p,div,span,input,textarea {
+	font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
+	font-size: 13px;
+}
+th{
+    font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
+	font-size: 13px; vertical-align:middle; text-align:center;
+}
+input {
+	border:1px solid rgb(183, 183, 183);
+}
+div.zendiv {
+	margin:1px;
+}
+.zenLabel {
+	margin:1px;
+	color: rgb(60,60,60);
+}
+body {
+	background-color:rgb(250,250,250);
+	/*background-image:url('../images/bg_back.jpg');*/
+}
+/* @doc="Default style for labels for disabled components." */
+.zenLabelDisabled {
+	padding-right: 3px;
+	color: darkgrey;
+}
+
+/* @doc="Default label style for required fields." */
+.zenRequired {
+	font-weight: bold;
+	padding-right: 3px;
+}
+
+/* @doc="Default after text for required fields." */
+.zenRequired:after {
+	content: " *";
+}
+
+/* @doc="Style for components with invalid values." */
+.zenInvalid {
+	background: #FFA0A0;
+}
+
+/* @doc="Style for error messages for controls." */
+.zenError {
+	color: red;
+	font-size: 90%;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+.zenError:before {
+	content: "[";
+}
+.zenError:after {
+	content: "]";
+}
+
+/* transparent overlay */
+.zenOverlay {
+	border: 1px dotted darkblue;
+	position: fixed;
+	z-index: 2;
+	background: none;
+}
+
+.zenOverlaySelected {
+	border: 2px solid darkblue;
+	position: fixed;
+	z-index: 2;
+	background: none;
+}
+
+/* @doc="Progress bar indicator." */
+.zenProgressBar {
+	border: 1px solid black;
+	background: #DDDDFF;
+	table-layout: fixed;
+}
+
+/* @doc="Thumb of progress bar indicator." */
+.zenProgressBarThumb {
+	border: 1px solid black;
+	background: blue;
+}
+
+/* @class="%ZEN.Component.colorPane" */
+table.colorPane {
+	background: silver;
+	border: 1px solid black;
+	font-family: arial;
+	font-size: 0.8em;
+	padding: 1px;
+}
+
+table.colorPane td {
+	padding: 0px;
+}
+
+.colorPaneRotator {
+	border: 1px black solid;
+	cursor: pointer;
+}
+
+.colorPaneCell {
+	border: 1px silver solid;
+	cursor: pointer;
+}
+
+.colorPaneCellSelected1 {
+	border: 1px green solid;
+	cursor: pointer;
+}
+.colorPaneCellSelected2 {
+	border: 1px red solid;
+	cursor: pointer;
+}
+.colorPaneCellSelected3 {
+	border: 1px blue solid;
+	cursor: pointer;
+}
+
+/* @class="%ZEN.Component.control" */
+/* @class="%ZEN.Component.abstractListBox" */
+
+/* @doc="Wrapper for listBox." */
+.listBox {
+	color: black;
+	background: white;
+	border: 1px rgb(183, 183, 183) solid;
+	width: 100%;
+	height: 100px;
+	overflow: auto;
+}
+
+/* @doc="Style for disabled list boxes." */
+.listBoxDisabled {
+	color: black;
+	background: darkgray;
+	border: 1px black solid;
+	width: 100%;
+	height: 100px;
+
+	overflow: auto;
+}
+
+/* @doc="Item within listBox." */
+.listBoxItem {
+	white-space: nowrap;
+	width: 100%;
+	color: black;
+	/* ie does not handle transparent */
+	border: 1px solid white;
+	cursor: pointer;
+	border-right:none;
+	border-left:none;
+}
+
+/* @doc="Selected item within listBox." */
+.listBoxItemSelected {
+	white-space: nowrap;
+	width: 100%;
+	color: black;
+	background: rgb(242, 242, 242);
+	font-weight: normal;
+	border: 1px solid rgb(183, 183, 183);
+	cursor: pointer;
+	border-right:none;
+	border-left:none;
+}
+
+/* @doc="Selected item with focus within listBox." */
+.listBoxItemFocus {
+	white-space: nowrap;
+	width: 100%;
+	font-weight: normal;
+	color: black;
+	background:rgb(242, 242, 242);
+	border: 1px solid rgb(183, 183, 183);;
+	border-right:none;
+	border-left:none;
+	cursor: pointer;
+}
+
+.listBoxItem:hover, .listBoxItemSelected:hover, .listBoxItemFocus:hover {
+	color: black;
+}
+
+/* no hover when disabled */
+.listBoxDisabled .listBoxItem:hover {
+	color: black;
+	background: darkgray;
+}
+
+.listBoxDisabled .listBoxItemSelected, .listBoxDisabled .listBoxItemSelected:hover, .listBoxDisabled .listBoxItemFocus {
+	white-space: nowrap;
+	width: 100%;
+	color: gray;
+	background: darkblue;
+	font-weight: bold;
+}
+
+/* @class="%ZEN.Component.dataListBox" */
+
+/* @class="%ZEN.Component.listBox" */
+/* @class="%ZEN.Component.button" */
+/* @doc="Style for button (input)." */
+.button {
+	background:rgb(245, 245, 245);
+	border: none;
+	color:SlateGrey;
+	padding:25px;
+	padding-top:7px;
+	padding-bottom:7px;
+	font-size: 13px;
+}
+.textRefBookButton {
+	border:1px solid rgb(183, 183, 183);
+}
+/* @class="%ZEN.Component.submit" */
+/* @class="%ZEN.Component.calendar" */
+/* @doc="Outer table for calendar." */
+table.calendarOutline {
+	border: 1px solid rgb(183, 183, 183);
+	text-align: center;
+	background: white;
+}
+
+/* @doc="Inner table for calendar." */
+table.calendar {
+	border: 1px solid rgb(183, 183, 183);
+	text-align: center;
+}
+
+/* @doc="Gap (td) between the year and month elements." */
+.calendarGap {
+	background: #F0F0F0;
+}
+
+/* @doc="Style for month and year when calendar is in fixedMonth mode." */
+span.calendarLabel {
+	/*padding-left: 2px;
+	padding-right: 2px;*/
+	font-weight: bold;
+	color: darkblue;
+}
+ 
+/* @doc="Table headers for calendar." */
+table.calendar th {
+	border-bottom: 1px gray solid;
+	/*padding-left: 2px;
+	padding-right: 2px;*/
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+	background: rgb(109, 132, 180);
+}
+
+/* @doc="Disabled table headers for calendar." */
+table.calendar th.calendarDisabled {
+	color: #808080;
+	background: #E0E0E0;
+}
+
+table.calendar td {
+	padding:5px;
+		
+}
+/* @doc="Empty cells within calendar." */
+table.calendar td.calendarEmpty {
+	border-bottom: 1px gray solid;
+	border-right: 1px gray solid;
+	/*padding-left: 2px;
+	padding-right: 2px;*/
+	background:  rgb(242, 242, 242);
+}
+
+/* each day of week can have its own style */
+table.calendar td.calendarDay0,
+table.calendar td.calendarDay1,
+table.calendar td.calendarDay2,
+table.calendar td.calendarDay3,
+table.calendar td.calendarDay4,
+table.calendar td.calendarDay5,
+table.calendar td.calendarDay6
+{
+	border-bottom: 1px gray solid;
+	border-right: 1px gray solid;
+	/*padding-left: 2px;
+	padding-right: 2px;*/
+	color: darkblue;
+	cursor: pointer;
+}
+
+/* @doc="Selected cell in calendar." */
+table.calendar td.calendarSelected {
+	border-bottom: 1px gray solid;
+	border-right: 1px gray solid;
+	/*padding-left: 1px;
+	padding-right: 1px;*/
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+	background: rgb(109, 132, 180);
+}
+
+table.calendar td.calendarSelected:hover {
+	background: orange;
+}
+
+table.calendar td.calendarDay0:hover,
+table.calendar td.calendarDay1:hover,
+table.calendar td.calendarDay2:hover,
+table.calendar td.calendarDay3:hover,
+table.calendar td.calendarDay4:hover,
+table.calendar td.calendarDay5:hover,
+table.calendar td.calendarDay6:hover
+{
+	background: orange;
+	border-bottom: 1px gray solid;
+	border-right: 1px gray solid;
+	/*padding-left: 1px;
+	padding-right: 1px;*/
+	font-weight: bold;
+	color: darkblue;
+	cursor: pointer;
+}
+
+/* @doc="Current day in calendar." */
+table.calendar td.calendarToday {
+	border-bottom: 1px gray solid;
+	border-right: 1px gray solid;
+	/*padding-left: 1px;
+	padding-right: 1px;*/
+	font-weight: bold;
+	color: darkblue;
+	cursor: pointer;
+}
+
+table.calendar td.calendarToday:hover {
+	background: orange;
+}
+
+/* @doc="Next or previous link in calendar." */
+table.calendar td.calendarLink {
+	border-bottom: 1px gray solid;
+	border-right: 1px gray solid;
+	/*padding-left: 2px;
+	padding-right: 2px;*/
+	background: #F0F0FF;
+	color: darkblue;
+	cursor: pointer;
+}
+
+table.calendar td.calendarLink:hover {
+	background: orange;
+}
+
+/* @doc="Disabled cells in calendar." */
+table.calendar td.calendarDisabled {
+	border-bottom: 1px gray solid;
+	border-right: 1px gray solid;
+	/*padding-left: 2px;
+	padding-right: 2px;*/
+	color: #808080;
+	background: #E0E0E0;
+}
+
+select.calendarSelect {
+	color: darkblue;
+	background-color:white;
+	border:1px solid;
+	font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
+	font-size: 13px; white-space: pre;
+}
+
+.calendarTimeDiv {
+	font-size: 13px; 
+	padding: 1px;
+}
+
+/* @class="%ZEN.Component.checkbox" */
+/* @doc="Style for checkbox control." */
+.checkbox {
+}
+
+/* @doc="Caption for checkbox." */
+span.checkboxCaption {
+	cursor: pointer;
+	white-space: nowrap;
+}
+/* @class="%ZEN.Component.colorPicker" */
+/* @doc="Table wrapper for colorPicker." */
+table.colorPicker {
+	border: 1px darkblue solid;
+}
+
+/* @doc="Cell in colorPicker." */
+.colorPickerCell {
+	border: 2px #F0F0FF solid;
+	cursor: pointer;
+}
+
+/* @doc="Selected cell in colorPicker." */
+.colorPickerCellSelected {
+	border: 2px red solid;
+	cursor: pointer;
+}
+
+/* @class="%ZEN.Component.dateText" */
+
+/* @doc="Text button in dateText." */
+.dateTextButton {
+	vertical-align: middle;
+	font-size: 0.7em;
+
+}
+
+img.comboboxImgButton {
+		height:16px;
+		width:16px;
+}
+input.comboboxInput {
+	font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
+	font-size: 13px; white-space: pre;
+	height:18px; text-transform: uppercase;
+}
+/* @class="%ZEN.Component.dynaGrid" */
+
+/* @doc="Main table for dynaGrid." */
+table.dynaGrid {
+	border:none;
+	border-top: 1px solid rgb(183, 183, 183);
+	background: white;
+	table-layout: fixed;
+	padding: 0px;
+	width: 100%;
+}
+
+/* @doc="Label for dynaGrid." */
+table.dynaGrid th.dynaGridLabel {
+	border-left: 1px solid gray;
+	border-bottom: 1px solid gray;
+	padding: 1px;
+	padding-left: 3px;
+	padding-right: 3px;
+	cursor: pointer;
+	background:rgb(192, 192, 192);
+	color:black;
+	text-align: left;
+	white-space: nowrap;
+	font-style: italic;
+	overflow: hidden;
+	color:red;
+}
+
+/* @doc="Column labels for dynaGrid." */
+table.dynaGrid th.dynaGridColumn {
+	border-left: 1px solid gray;
+	border-bottom: 1px solid gray;
+	padding: 1px;
+	padding-left: 3px;
+	padding-right: 3px;
+	cursor: pointer;
+	background:rgb(59, 89, 152);
+	color: #FFFFFF;
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+/* @doc="Row labels for dynaGrid." */
+table.dynaGrid th.dynaGridRow {
+	border-left: 1px solid gray;
+	border-bottom: 1px solid gray;
+	padding: 1px;
+	padding-left: 3px;
+	padding-right: 3px;
+	cursor: pointer;
+	background:  rgb(59, 89, 152);
+	color: #FFFFFF;
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+/* @doc="Cells within dynaGrid." */
+table.dynaGrid td {
+	border-left: 1px solid gray;
+	border-bottom: 1px solid gray;
+	padding: 0px;
+	margin: 0px;
+	background: white;
+	cursor: pointer;
+	text-align: center;
+}
+
+table.dynaGrid td div {
+	width: 100%;
+	/*height: 100%;*/
+	height:15px;
+	padding: 0px;
+	margin: 0px;
+	/*overflow: hidden;*/
+	vertical-align: middle;
+ 	border: none;
+}
+
+/* @doc="Current cell with focus within dynaGrid." */
+table.dynaGrid td div.focus {
+	color: white;
+	background: rgb(109, 132, 180);
+
+}
+
+/* @doc="Selected cell within dynaGrid." */
+table.dynaGrid td div.selected {
+	background: rgb(109, 132, 180);
+}
+
+/* @doc="Input control within dynaGrid." */
+.dynaGridInput {
+ 	border: none;
+	background: #FFFFA0;
+	height:5px;
+	
+}
+
+/* @doc="Input control (with focus) within dynaGrid." */
+.dynaGridInput:focus {
+	background: #FFFFE0;
+}
+
+/* @class="%ZEN.Component.objectInspector" */
+
+/* @doc="Main table for objectInspector." */
+table.inspectorGrid {
+	border: 1px solid black;
+	background: white;
+	table-layout: fixed;
+	padding: 0px;
+	width: 100%;
+}
+
+/* @doc="Label for objectInspector." */
+table.inspectorGrid th.dynaGridLabel {
+	border-right: 1px solid gray;
+	border-bottom: 1px solid gray;
+	padding: 1px;
+	padding-left: 3px;
+	padding-right: 3px;
+	cursor: pointer;
+	background: #DDEEFF;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+	color: black;
+	background: #404040;
+	background-image: url(/csp/broker/images/grad-gray-10x100.png);
+	background-repeat: repeat-x;
+}
+
+/* @doc="Column labels for objectInspector." */
+table.inspectorGrid th.dynaGridColumn {
+	border-bottom: 1px solid gray;
+	padding: 1px;
+	padding-left: 3px;
+	padding-right: 3px;
+	cursor: pointer;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+	color: black;
+	background: #404040;
+	background-image: url(/csp/broker/images/grad-gray-10x100.png);
+	background-repeat: repeat-x;
+}
+
+/* @doc="Row labels for objectInspector." */
+table.inspectorGrid th.dynaGridRow {
+	border-right: 1px solid gray;
+	border-bottom: 1px solid gray;
+	padding: 1px;
+	padding-left: 3px;
+	padding-right: 3px;
+	cursor: pointer;
+	background: #DDEEFF;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+	font-weight: normal;
+	color: darkblue;
+	background: #404040;
+	background-image: url(/csp/broker/images/grad-gray-10x100.png);
+	background-repeat: repeat-x;
+}
+
+/* @doc="Cells within objectInspector." */
+table.inspectorGrid td {
+	border-bottom: 1px solid gray;
+	padding: 0px;
+	margin: 0px;
+	cursor: pointer;
+	text-align: right;
+}
+
+table.inspectorGrid th.dynaGridLabel:hover,
+table.inspectorGrid th.dynaGridRow:hover,
+table.inspectorGrid th.dynaGridColumn:hover {
+	color: white;
+	background: #808080;
+}
+
+table.inspectorGrid td div {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+/* @doc="Current cell with focus within objectInspector." */
+table.inspectorGrid td div.focus {
+	color: white;
+	background: #000040;
+	background-image: url(/csp/broker/images/grad-blue-10x30.png);
+	background-repeat: repeat-x;
+}
+
+/* @doc="Selected cell within objectInspector." */
+table.inspectorGrid td div.selected {
+	background: #E0E0E0;
+}
+
+.objectInspectorButton {
+	font-size: 0.8em;
+	height: 20px;
+	width: 20px;
+	background-image: url(/csp/broker/images/inspector.gif);
+	background-repeat: no-repeat;
+	background-color: #C0C0C0;
+}
+
+/* div containing popup button */
+.objectInspectorButtonDiv {
+	width: 100%;
+	height: 100%;
+	background: #000040;
+	background-image: url(/csp/broker/images/grad-blue-10x30.png);
+	background-repeat: repeat-x;
+}
+
+/* @class="%ZEN.Component.fileUpload" */
+/* @doc="Style for fileUpload control" */
+.fileUpload {
+}
+/* @class="%ZEN.Component.hidden" */
+/* @class="%ZEN.Component.image" */
+
+/* @doc="Style used for images with links." */
+.imageLink {
+	cursor: pointer;
+}
+
+/* @class="%ZEN.Component.label" */
+/* @doc="Style for labelText component." */
+.labelText {
+}
+/* @class="%ZEN.Component.listControl" */
+/* @class="%ZEN.Component.radioSet" */
+/* @doc="Span around radio button and caption." */ 
+.radioSetSpan {
+	white-space: nowrap;
+}
+
+/* @doc="Style for radio captions." */
+/*a.radioSetCaption {
+	vertical-align: top;
+	text-decoration: none;
+	color: black;
+}
+
+a.radioSetCaption:hover {
+	color: black;
+}
+
+a.radioSetCaption:link, .radioSetCaption:visited, .radioSetCaption:active {
+}
+
+/* @class="%ZEN.Component.select" */
+/* @doc="Style for select." */
+.select {
+}
+/* @class="%ZEN.Component.radioButton" */
+/* @doc="Caption for radio button." */
+span.radioButtonCaption {
+	cursor: pointer;
+	white-space: nowrap;
+}
+/* @class="%ZEN.Component.text" */
+/* @doc="Style for text (input)." */
+.text {
+	border: 1px solid rgb(183,183,183);
+}
+/* @class="%ZEN.Component.abstractComboBox" */
+
+/* @doc="Input box of combobox." */
+.comboboxInput {
+	background: white;
+	vertical-align: middle;
+	border-top: 1px solid rgb(183,183,183);
+	border-bottom: 1px solid rgb(183,183,183);
+	border-left: 1px solid rgb(183,183,183);
+	border-right: none;
+}
+
+/* @doc="Input box of combobox in timer mode." */
+.comboboxInputTimer {
+	border: 1px solid rgb(183,183,183);
+}
+
+/* @doc="Wrapper for dropdown of combobox." */
+.comboboxDropDown {
+	position: absolute;
+	margin: 0px;
+	top: 0px;
+	left: 0px;
+	background: white;
+	border: 1px solid rgb(192,192,192);
+	width: 250px;
+	height: 250px;
+	overflow: scroll;
+}
+
+/* @doc="Image button in combobox." */
+.comboboxImgButton {
+	background: white;
+	vertical-align: middle;
+	border-top: 1px solid rgb(192,192,192);
+	border-bottom: 1px solid rgb(192,192,192);
+	border-left: none;
+	border-right: 1px solid rgb(192,192,192);
+	/* attempt to scale button with text */
+	width: 1.1em;
+	height: 1.1em;
+}
+
+/* @doc="Text button in combobox." */
+.comboboxTextButton {
+	vertical-align: middle;
+	border: 1px solid rgb(192,192,192);
+	font-size:11px;
+	color:white;
+	height: 18px;
+	background: rgb(59, 89, 152);
+
+}
+
+.comboboxTextButton:hover {
+	background: #404000;
+	background-image: url(/csp/broker/images/grad-yellow-10x100.png);
+	background-repeat: repeat-x;
+}
+
+/* @doc="Table displaying combobox dropdown contents." */
+.comboboxTable {
+	background: white;
+	width: 100%;
+}
+
+.comboboxTable td {
+	white-space: nowrap;
+	padding-right: 3px;
+	padding-bottom: 2px;
+	/*background: #DAA520;*/
+}
+
+/* @doc="Headers within combobox dropdown list." */
+.comboboxTable th {
+	white-space: nowrap;
+	padding-right: 3px;
+	padding-bottom: 2px;
+	font-weight: bold;
+	text-align: left;
+	border-bottom: 1px solid #808080;
+	background: rgb(192, 192, 192);
+	background: #DAA520; /* Заголовок*/
+}
+
+/* @doc="Item (tr) within combobox dropdown." */
+.comboboxItem {
+	color: black;
+	cursor: pointer;
+	padding-left:3px;
+}
+.comboboxItemSelected td {
+	border: 1px solid transparent;
+	border-right:none;
+	border-left:none;
+	color:black;
+	background: #DAA520;
+
+}
+
+/* @doc="Selected item (tr) within combobox dropdown." */
+.comboboxItemSelected {
+	color: black;
+	/*background: rgb(242, 242, 242);	*/
+	font-weight: normal;
+	
+	cursor: pointer;
+	padding-left:3px;
+}
+
+.comboboxItemSelected td {
+	border: 1px solid rgb(183, 183, 183);
+	border-right:none;
+	border-left:none;
+	color: black;
+}
+
+/* @doc="Style for loading message within combobox dropdown." */
+.comboboxLoading {
+	font-style: italic;
+	color: blue;
+}
+/* @class="%ZEN.Component.combobox" */
+/* @class="%ZEN.Component.dataCombo" */
+/* @class="%ZEN.Component.password" */
+/* @doc="Style for password (input)." */
+.password {
+}
+/* @class="%ZEN.Component.textarea" */
+/* @doc="Style for textarea." */
+.textarea {
+}
+/* @class="%ZEN.Component.dynaTree" */
+
+/* @doc="div for node in tree." */
+.dynaTreeNode {
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+/* @doc="Caption for node in tree." */
+.dynaTreeNode a {
+	color: orange;
+	padding: 2px;
+	text-decoration: none;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	padding: 1px;
+}
+
+/* @doc="Current selected node in tree." */
+.dynaTreeNodeSelected {
+	color: black;
+	font-weight: bold;
+	background: #D0D0D0;
+	border: 1px solid darkblue;
+	padding: 0px;
+}
+
+.dynaTreeNode a img {
+	border: none;
+}
+
+.dynaTreeNode a:hover {
+	color: black;
+}
+
+.dynaTreeNode a:focus {
+	color: black;
+	background: darkblue;
+}
+/* @class="%ZEN.Component.dynaView" */
+
+/* @doc="Default style for dynaView: list mode." */
+table.dynaViewList {
+	background: white;
+	padding: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+/* @doc="Default style for dynaView: details mode." */
+table.dynaViewDetails {
+	background: white;
+	padding: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+/* @doc="Table header within dynaView: details mode." */
+table.dynaViewDetails th {
+	text-align: left;
+	color: black;
+	font-weight: bold;
+	padding: 2px;
+	border-bottom: 1px solid #808080;
+	background: #404040;
+	background-image: url(/csp/broker/images/grad-gray-10x30.png);
+	background-repeat: repeat-x;
+}
+
+/* @doc="Selectable item within dynaView." */
+.dynaViewItem {
+	vertical-align: middle;
+	white-space: nowrap;
+	color: black;
+	/* ie does not handle transparent */
+	border: 1px solid white;
+}
+
+/* @doc="Selected item in dynaView." */
+.dynaViewItemSelected {
+	vertical-align: middle;
+	white-space: nowrap;
+	color: black;
+	background: #E0E0E0;
+	border: 1px dotted #202060;
+}
+
+/* @doc="Selected item with focus in dynaView." */
+.dynaViewItemFocus {
+	vertical-align: middle;
+	white-space: nowrap;
+	color: white;
+	background: #000040;
+	background-image: url(/csp/broker/images/grad-blue-10x30.png);
+	background-repeat: repeat-x;
+	border: 1px solid black;
+}
+
+/* @doc="Image in dynaView." */
+.dynaViewItem img, .dynaViewItemSelected img, .dynaViewItemFocus img {
+	border: none;
+	vertical-align: middle;
+}
+
+.dynaViewItem:hover {
+	color: black;
+}
+
+/* @class="%ZEN.Component.group" */
+/* @doc="Table used by groups." */
+table.group {
+	padding: 0px;
+}
+
+/* @doc="Cell within table used by groups." */
+table.group td {
+	padding: 0px;
+}
+
+/* @doc="Header within table used by groups." */
+table.group th {
+	padding: 0px;
+}
+
+/* @doc="Style for td containing component label in a vertical group." */
+.vtLabelLeft {
+	text-align: right;
+}
+
+/* @doc="Style for td containing component label in a horizontal group." */
+.hzLabelLeft {
+	text-align: right;
+}
+
+/* @class="%ZEN.Component.abstractPage" */
+/* @doc="Style applied to body of page." */
+body {
+	margin: 0px;
+}
+
+#zenMouseTrap {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	background: transparent;
+}
+
+/* @class="%ZEN.Component.page" */
+/* @class="%ZEN.Component.xulFrame" */
+/* @class="%ZEN.Component.composite" */
+/* @class="%ZEN.Component.tableNavigator" */
+.tn-pageLabel {
+	font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
+	color:black;
+	font-size: 11px;
+	font-weight:bold;
+	padding:3px;
+	margin-right: 5px;
+	margin-left: 2px;
+}
+/* @class="%ZEN.Component.expando" */
+/* @doc="Layout for node caption." */
+.expandoTable {
+}
+
+/* @doc="div element around node caption." */
+.expandoNode {
+}
+
+/* @doc="a element around node image and caption." */
+.expandoNode a {
+	color: black;
+	border: none;
+	text-decoration: none;
+}
+
+/* @doc="Mouse over expando caption." */
+.expandoNode a:hover {
+	color: red;
+}
+
+.expandoNode a.menuItem:link, .expandoNode a.menuItem:visited, .expandoNode a.menuItem:active {
+}
+
+/* @doc="Image for expando node." */
+.expandoImg {
+	border: none;
+}
+
+/* @doc="div wrapper around node children." */
+.expandoChildren {
+}
+
+/* @class="%ZEN.Component.fieldSet" */
+/* @doc="Style for fieldSet." */
+/*.fieldSet {
+	padding:3px;
+	border:1px solid rgb(183, 183, 183);
+	border-left:5px solid rgb(109, 132, 180);
+}
+fieldset.fieldSet {
+	background:rgb(242, 242, 242);
+
+}
+table.fieldSet {
+	border:none;
+	
+}
+.fieldSet legend {
+	padding-right:5px;
+	padding-left:5px;
+	background:rgb(242, 242, 242);
+	border:1px solid rgb(183, 183, 183);
+}
+
+/* @doc=="Style for disabled fieldSet." */
+/*.fieldSetDisabled {
+	color: #101010;
+	background: #E0E0E0;
+	border:1px solid rgb(183, 183, 183);
+	border-left:5px solid rgb(183, 183, 183);
+}
+
+/* @doc=="Style for disabled fieldSet legend." */
+/*.fieldSetDisabled legend {
+	color: #101010;
+	background: #E0E0E0;
+}
+
+/* @class="%ZEN.Component.form" */
+/* @class="%ZEN.Component.dynaForm" */
+/* @class="%ZEN.Component.hgroup" */
+/* @class="%ZEN.Component.menu" */
+/* @doc="Table used for menus." */
+.menuTable {
+	border: 1px solid #CD950C;
+	padding: 0px;
+	background: #CD950C;
+}
+table.menuTable div.zendiv {
+	margin:0px;
+	padding:0px;
+	vertical-align:top;
+	/*height:50px;*/
+	border: none;
+}
+table.menuTable div.zendiv .label {
+	margin:0px;
+	padding:0px;
+}
+/* @doc="Table used for sub-menus." */
+.submenu {
+	background: lightblue;
+	padding:0px;
+	margin:0px;
+	border:none;
+}
+
+/* @class="%ZEN.Component.hmenu" */
+.hmenuTable {
+	background: lightblue;
+	border-bottom: 1px solid rgb(183, 183, 183);
+	padding: 0px;
+}
+
+/* @class="%ZEN.Component.vmenu" */
+
+/* style for enc div */
+.vmenu {
+    background: background:rgb(242, 242, 242);
+	height: 100%;
+	padding: 0px;
+}
+
+/* style for layout table */
+.vmenuTable {
+	border: none;
+	padding: 0px;
+}
+
+/* @class="%ZEN.Component.modalGroup" */
+/* @doc="Style for modalGroup" */
+.modalGroup {
+	position: absolute;
+	border-top: 1px lightblue solid;
+	border-left: 1px lightblue solid;
+	border-right: 2px darkblue solid;
+	border-bottom: 2px darkblue solid;
+	background: white;
+}
+
+/* @doc="Title bar for modal group" */
+.modalGroupTitle {
+	border-bottom: 1px black solid;
+	background: darkblue;
+	padding: 0px;
+	cursor: move;
+}
+
+.modalGroupTitle table {
+	border: 1px solid darkblue;
+}
+
+.modalGroupTitle td {
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 8px;
+	padding-right: 0px;
+	border: 1px solid darkblue;
+	font-weight: bold;
+	color: white;
+}
+
+/* @doc="Close button for modalGroup" */
+.modalGroupCloseButton {
+	color: black;
+	font-family: verdana;
+	font-size: 5pt;
+	height: 100%;
+	font-weight: bold;
+	padding: 0px;
+}
+
+/* @doc="Body of modal group" */
+.modalGroupBody {
+	padding: 3px;
+	background:#CCCCCC;
+}
+
+/* @doc="OK button holder for MsgBox" */
+.modalGroupFooter {
+	padding: 3px;
+	padding-top: 10px;
+	background: #CCCCCC;
+	text-align: center;
+}
+
+.modalGroupFooter input {
+	width: 7.0em;
+	font-size: 0.8em;
+}
+
+/* @class="%ZEN.Component.pane" */
+/* @class="%ZEN.Component.repeatingGroup" */
+/* @doc="Unselected grouping within a repeating group." */
+.repeatingGroup {
+}
+
+/* @doc="Selected grouping within a repeating group." */
+.repeatingGroupSelected {
+	background: #404040;
+	background-image: url(/csp/broker/images/grad-gray-10x100.png);
+	background-repeat: repeat-x;
+}
+/* @class="%ZEN.Component.tab" */
+/* @class="%ZEN.Component.tabGroup" */
+
+/* @doc="Wrapper for body of tabgroup, when tab bar is shown." */
+.tabGroupBody {
+	padding:5px;
+	background:rgb(242, 242, 242);
+	border-right: 1px solid rgb(183, 183, 183);
+	border-left: 1px solid rgb(183, 183, 183);
+	border-bottom: 1px solid rgb(183, 183, 183);
+	border-top: none;
+	height:100%;
+}
+
+/* @doc="Container of tab bar buttons." */
+table.tabGroupBar {
+
+}
+
+/* @doc="Individual tab bar button in On state." */
+td.tabGroupButtonOn {
+	background: rgb(109, 132, 180);
+	color:white;
+	border-top: 1px solid rgb(59, 89, 152);
+	border-bottom: 1px solid rgb(85, 85, 85);
+	border-right: 1px solid rgb(59, 89, 152);;
+	border-left: 1px solid rgb(59, 89, 152);;
+	font-weight: bold;
+	padding-right:7px;
+	padding-left:7px;
+	padding-top:4px;
+	padding-bottom:4px;
+	cursor: pointer;
+	-moz-border-radius-topleft:0px;
+	-moz-border-radius-topright:0px;
+}
+
+/* @doc="Individual tab bar button in Off state." */
+td.tabGroupButtonOff {
+	background:rgb(242, 242, 242);
+	border-top: 1px solid rgb(183, 183, 183);
+	border-bottom: 1px solid rgb(183, 183, 183);
+	border-right: 1px solid rgb(183, 183, 183);
+	border-left: 1px solid rgb(183, 183, 183);
+	padding-right:7px;
+	padding-left:7px;
+	padding-top:5px;
+	padding-bottom:5px;
+	cursor: pointer;
+	font-weight: bold;
+	-moz-border-radius-topleft:0px;
+	-moz-border-radius-topright:0px;
+}
+
+/* @doc="Individual tab bar button in Disabled state." */
+td.tabGroupButtonDisabled {
+	background:rgb(242, 242, 242);
+	color: darkgray;
+	border-top: 1px solid rgb(183, 183, 183);
+	border-bottom: 1px solid rgb(183, 183, 183);
+	border-right: 1px solid rgb(183, 183, 183);
+	border-left: 1px solid rgb(183, 183, 183);
+	padding-right:7px;
+	padding-left:7px;
+	padding-top:5px;
+	padding-bottom:5px;
+	font-weight: bold;
+	-moz-border-radius-topleft:0px;
+	-moz-border-radius-topright:0px;
+}
+
+td.tabGroupButtonOff:hover {
+	background: rgb(242, 242, 242);
+	text-decoration: underline;
+}
+
+.tabGroupGap {
+	display:none;
+}
+/* @doc="Extra space on edges of tab bar." */
+.tabGroupExtra {
+	border-bottom: 1px solid rgb(183, 183, 183);
+	background: transparent;
+	
+}
+/* @class="%ZEN.Component.lookoutMenu" */
+
+/* @doc="Style for lookoutMenu enclosing div." */
+.lookoutMenu {
+	height: 100%;
+	padding: 0px;
+}
+
+/* @doc="Style for lookoutMenu children div." */
+.lookoutMenuChildren {
+}
+
+/* @doc="Button within lookoutMenu." */
+.lookoutButton {
+	position: absolute;
+	padding: 3px;
+}
+
+/* @doc="Style for enclosing div for tab within lookoutMenu." */ 
+.lookoutTab {
+	position: absolute;
+	padding: 1px;
+	background: darkgray;
+	overflow: auto;
+}
+
+/* @doc="Style for grip within lookoutMenu." */ 
+.lookoutGrip {
+	color: white;
+	background: darkblue;
+	border: 1px solid black;
+	width: 100%;
+}
+
+/* @class="%ZEN.Component.vgroup" */
+/* @class="%ZEN.Component.helpBox" */
+div.helpBoxOn {
+	border: 1px solid black;
+	background: #AAAAFF;
+}
+
+div.helpBoxOff {
+	display: none;
+}
+
+div.helpBoxTitle {
+	font-weight: bold;
+	color: darkblue;
+}
+
+div.helpBoxMsg {
+	font-size: 0.8em;
+	color: darkblue;
+}
+/* @class="%ZEN.Component.html" */
+/* @class="%ZEN.Component.iframe" */
+/* @class="%ZEN.Component.link" */
+/* @doc="Style for link." */
+.link {
+	color:rgb(59, 89, 152);
+	text-decoration:none;
+}
+.link:hover {
+	text-decoration:underline;
+}
+
+/* @doc="Style for disabled link." */
+.linkDisabled {
+	color: gray;
+	text-decoration: none;
+}
+/* @class="%ZEN.Component.locatorBar" */
+/* @doc="Table used for locator bar." */
+.locatorBarTable {
+	font-size: 10pt;
+	width: 100%;
+	padding:5px;
+}
+
+/* @doc="Cell within locator bar." */
+.locatorBarTable td {
+	background: rgb(109, 132, 180);
+	border:none;
+
+}
+
+/* @doc="Div around locator links." */
+.locatorBarLinks {
+	font-size:11px;
+	font-weight: bold;
+	color: white;
+	text-decoration: none;
+	text-align: left;
+	padding:5px;
+	padding-top:5px;
+	padding-bottom:6px;
+}
+
+/* @doc="Links in locator bar." */
+.locatorBarLinks a {
+	color: white;
+	text-decoration: none;
+	padding-right: 1px;
+	padding-left: 1px;
+}
+
+.locatorBarLinks a:visited {
+	color: white;
+}
+
+.locatorBarLinks a:hover {
+	color: white;
+	text-decoration:underline;
+	background: rgb(109, 132, 180); 
+}
+
+/* @doc="Dropdown of jump links in locator bar." */
+.locatorBarSelect {
+	color: darkblue;
+	font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
+	font-size: 11px;
+}
+/* @class="%ZEN.Component.menuItem" */
+
+/* @doc="Basic menu item." */
+a.menuItem {
+	display: block;
+	color: white;
+	font-weight:bold;
+	/*padding: 2px 3px 2px 3px;*/
+	padding:0px;
+	padding-top:3px;
+	padding-bottom:3px;
+	margin:0px;
+	text-decoration: none;
+	white-space: nowrap;
+	vertical-align: middle;
+	border:none;
+	/*margin: 1px 1px 1px 1px;*/
+}
+
+a.menuItem img,a.menuItemActive img,a.menuItemDisabled img {
+	border: none;
+	background-color:yellow;
+	height:16px;
+	width:16px;
+	display:none;
+}
+
+/* @doc="Mouse over menu item." */
+a.menuItem:hover {
+	background: rgb(183, 183, 183);
+	border: none;
+	margin: 0px 0px 0px 0px;
+}
+
+a.menuItem:link, a.menuItem:visited, a.menuItem:active {
+}
+
+/* @doc="Disabled menu item." */
+a.menuItemDisabled {
+	display: block;
+	color: orange;
+	font-weight:bold;
+	/*padding: 2px 3px 2px 3px;*/
+	padding:0px;
+	padding-top:3px;
+	padding-bottom:3px;
+	margin:0px;
+	text-decoration: none;
+	white-space: nowrap;
+	vertical-align: middle;
+	border:none;
+
+	/*margin: 1px 1px 1px 1px;*/
+}
+
+a.menuItemDisabled:hover,a.menuItemDisabled:active,a.menuItemDisabled:link, a.menuItemDisabled:visited {
+}
+
+/* active menu item: this is used for top-level items
+	when their submenu is displayed.
+*/
+
+a.menuItemActive {
+	background: rgb(183, 183, 183);
+	display: block;
+	color: white;
+	font-weight:bold;
+	/*padding: 2px 3px 2px 3px;*/
+	padding:0px;
+	padding-top:3px;
+	padding-bottom:3px;
+	margin:0px;
+	text-decoration: none;
+	white-space: nowrap;
+	vertical-align: middle;
+	border:none;
+	/*margin: 1px 1px 1px 1px;*/
+}
+
+a.menuItemActive:hover,a.menuItemActive:active,a.menuItemActive:link, a.menuItemActive:visited {
+
+}
+
+/* @class="%ZEN.Component.menuSeparator" */
+/* @doc="Style for menu separator (hr)." */
+.menuSeparator {
+	padding:0px;
+	color:white;
+	height:1px;
+}
+/* @class="%ZEN.Component.objectBrowser" */
+
+/* outer div for object browser */
+div.objectBrowserDiv {
+	background: white;
+	border: 1px solid black;
+	padding: 2px;
+	overflow: auto;
+	height: 400px;
+}
+
+ul.objectBrowser {
+	list-style-type: disc;
+	margin-top: 0px;
+	padding-top: 0px;
+	margin-left: 0.5em;
+	padding-left: 0.5em;
+	
+}
+
+/* @class="%ZEN.Component.simpleTablePane" */
+
+/* @doc="Main table for tablePane" */
+table.tpTable {
+	background: white;
+	border: 1px solid rgb(183, 183, 183);
+	/*border-bottom:3px solid rgb(59, 89, 152);*/
+	border-right:1px solid rgb(183, 183, 183);
+	table-layout: ;
+	empty-cells: show;
+}
+
+/* @doc="Caption above table."*/
+table.tpTable caption {
+	font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: left;
+	padding: 4px;
+	color:white;
+	border: 1px solid rgb(205, 149, 12);
+	border-bottom:none;
+	background: #CD950C;
+}
+
+/* @doc="Column header." */
+table.tpTable th {
+	border-right: 1px solid gray;
+	border-bottom: 1px solid gray;
+	color: black;
+	font-weight: bold;
+	text-align: center;
+	padding: 2px;
+	overflow: hidden;
+	background:rgb(192, 192, 192);
+}
+
+/* @doc="Selected column header." */
+table.tpTable th.tpHdrSelected {
+	color: white;
+	background: rgb(109, 132, 180);
+}
+
+table.tpTable td {
+	border-right: 1px solid gray;
+	border-bottom: 1px solid gray;
+	padding: 2px;
+	/*overflow: hidden;*/
+	/*text-overflow: ellipsis;*/
+}
+
+table.tpTable tr.tpSelected td {
+	/*border-top: 1px solid gray;*/
+	border-bottom: 1px solid gray;
+	border-top: none;
+	/*border-bottom: none;*/
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+/* @doc="Selected row within table." */
+table.tpTable tr.tpSelected {
+	color: white;
+	background: rgb(255, 193, 37);
+	border-bottom:1px solid rgb(109, 132, 180); /*Цвет выделенной ячейки - жёлтоватый*/
+}
+
+/* @doc="Style used for table body outside of cells within the table." */
+.tpBody {
+	background: #DDDDDD;
+}
+
+/* @doc="Style used for table body outside of cells within the table when using fixed headers." */
+.tpBodyFixed {
+	background: #DDDDDD;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+ 
+/* @doc="Style for rows when not using zebra styling." */
+.tpRow {
+	color: black;
+	background: white;
+}
+
+/* @doc="Style for odd-rows when using zebra styling." */
+.tpOdd {
+	color: black;
+	background: white;
+}
+
+/* @doc="Style for even-rows when using zebra styling." */
+.tpEven {
+	color: black;
+	background: #EEE8AA;
+}
+
+/* @doc="Cell containing a string value." */
+.tpStr {
+
+}
+
+/* @doc="Cell containing numeric value." */
+.tpNum {
+	text-align: right;
+}
+
+/* @doc="Cell containing the current row selector." */
+.tpSel {
+	text-align: center;
+	font-weight: bold;
+}
+
+/* @doc="Cell containing the row number." */
+.tpRNum {
+	text-align: right;
+}
+
+/* @doc="Cell containing a link." */
+.tpAction {
+}
+
+.tpAction a {
+	white-space: nowrap;
+	color: darkblue;
+}
+
+.tpAction a:hover {
+	color: darkblue;
+}
+
+.tpAction a:link {
+	color: darkblue;
+}
+
+.tpAction a:active {
+	color: darkblue;
+}
+
+/* @doc="Cell displaying No Results message." */
+.tpNoResults {
+	font-style: italic;
+	color: #202060;
+	background: white;
+}
+
+/* @doc="Table containing filter controls." */
+table.tpFilterLayout {
+	border: none;
+}
+
+/* @doc="Cell within table containing filter controls." */
+table.tpFilterLayout td {
+	border: none;
+	background: none;
+}
+
+/* @doc="Filter control." */
+.tpFilter {
+	width: 100%;
+	font-size: 13px; text-align:center; margin-top:auto
+}
+
+/* @doc="Filter control for date values." */
+.tpFilterDate {
+	font-size: 13px; text-align:center; vertical-align:middle;
+}
+
+/* @doc="Filter control with focus." */
+.tpFilter:focus {
+	background: #FFFFE0;
+}
+
+/* @doc="Label for filter control." */
+.tpFilterLabel {
+	font-size: 0.6em;
+	font-weight: normal;
+	text-align: right;
+}
+
+/* @doc="Button in filter section." */
+.tpFilterButton {
+	vertical-align: middle;
+	border: 1px solid black;
+	font-size: 0.6em;
+}
+
+.tpFilterButton:hover {
+	background: #FFFF80;
+}
+
+/* @class="%ZEN.Component.tablePane" */
+/* @class="%ZEN.Component.spacer" */
+/* @class="%ZEN.Component.tableNavigatorBar" */
+
+/* @doc="Table around navigator bar." */
+.tnbrTable {
+	border:1px solid rgb(183, 183, 183);
+	background: rgb(242, 242, 242);
+	padding: 5px;
+}
+
+/* @doc="Buttons within navigator bar." */
+.tnbrPagingButtons {
+	color: black;
+	background: white;
+	border: 1px solid rgb(183,183,183);
+	padding: 1px;
+	margin-left: 5px;
+	font-size:11px;
+}
+
+/* @doc="Link within navigator bar." */
+.tnbrPageLink {
+	color: black;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/* @doc="Disabled link within navigator bar." */
+.tnbrPageLinkDisabled {
+	color: #B0B0B0;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+/* @doc="Current page button within navigator bar." */
+.tnbrPageLinkCurr {
+	color: white;
+	font-weight: bold;
+	padding-left: 4px;
+	padding-right: 4px;
+	border-left: none;
+	border-right: none;
+	background:rgb(59, 89, 152);
+}
+
+/* @doc="Row count indicator." */
+.tnbrFound {
+	color: #202020;
+	font-weight: bold;
+	font-size: 11px;
+}
+
+/* @doc="Filter and page size control." */
+.tnbrFilter {
+	color: #202020;
+	padding-right: 10px;
+	font-weight: bold;
+	font-size: 11px;
+}
+
+.tnbrFilter input {
+	color: #202020;
+	font-size: 11px;
+	border: 1px solid rgb(183,183,183);
+}
+
+/* @class="%ZEN.Component.timer" */
+/* @class="%ZEN.Component.titleBox" */
+div.titleBoxTitle {
+	font-size: 1.0em;
+	font-weight: bold;
+	text-align: left;
+	padding: 2px;
+	border-bottom: 1px solid black;
+	white-space: nowrap;
+}
+
+div.titleBoxSubtitle {
+	font-size: 0.8em;
+	font-weight: normal;
+	text-align: left;
+	padding-top: 5px;
+	text-indent: 10px;
+}
+/* @class="%ZEN.Component.titlePane" */
+.titlePane {
+	color: darkblue;
+	background: #FFFAE7;
+	width: 100%;
+	padding: 0px;
+	border-bottom: 1px solid darkblue;
+	font-size: 1.4em;
+	font-family: verdana;
+	text-align: center;
+}
+/* EOF */
